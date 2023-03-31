@@ -16,8 +16,7 @@ jobs:
         with:
           preCommands: npm ci
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          config: wrangler_sched.toml
-      - uses: actions/checkout@v2
+          workingDirectory: sched
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
