@@ -1,5 +1,8 @@
-export function buildResponse(text: string, status = 200) {
+import {Temperature} from './types'
+
+export function buildResponse(temps: Temperature[], status = 200) {
   // Build a HTML response containing the text
+  const temperature = temps.map(t => `${t.time}: ${t.temp}°C`).join('')
   const html = `
     <!DOCTYPE html>
     <html>
@@ -23,7 +26,7 @@ export function buildResponse(text: string, status = 200) {
         </style>
     </head>
     <body>
-        <h1>${text}</h1>
+        <h1>${temperature}</h1>
         <p><code>/:id/</code><code>/:id/increment</code><code>/:id/decrement</code></p>
     </body>
     </html>
