@@ -2,7 +2,7 @@ import {Temperature} from './types'
 
 export function buildResponse(temps: Temperature[], status = 200) {
   // Build a HTML response containing the text
-  const temperature = temps.map(t => `${t.time}: ${t.temp}°C`).join('')
+  const temperature = temps.map(t => `${t.time}: ${t.temp}°C`).join('<br />')
   const html = `
     <!DOCTYPE html>
     <html>
