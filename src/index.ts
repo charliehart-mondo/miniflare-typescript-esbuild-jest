@@ -15,18 +15,13 @@ export async function handleRequest(request: Request, env: Bindings): Promise<Re
   // const id = COUNTER.idFromName(match.groups.name);
   // const stub = COUNTER.get(id);
   // ...removing the name prefix from URL
-  url.pathname = match.groups.action;
-  const temps: Temperature[] = [
-    {
-      time: '2023-03-31T11:00:00',
-      temp: 50
-    },
 
-    {
-      time: '2023-03-31T11:05:00',
-      temp: 45
-    }
-  ]
+  const { KV_NAMESPACE } = env;
+  await KV_NAMESPACE.put('2023-03-31T11:00:00', (Math.random()*10+37).toFixed(2))
+  const keys = await KV_NAMESPACE.list()
+  const temps: Temperature[] = await Promise.all(keys.keys.map(async k => ({time: k.name, temp: await KV_NAMESPACE.get(k.name)|| ''})))
+
+  url.pathname = match.groups.action;
   const resp = buildResponse(temps)
   return resp
 }
