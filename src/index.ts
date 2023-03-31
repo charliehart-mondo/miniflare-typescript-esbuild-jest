@@ -13,6 +13,12 @@ export async function handleRequest(request: Request, env: Bindings): Promise<Re
 
   const { KV_NAMESPACE } = env;
   const keys = await KV_NAMESPACE.list()
+  const st = spacetime()
+  const future = st.add(5, 'minutes')
+  const time = new Date()
+  const plusFive = time.getTime()
+  .toLocaleString()
+  await KV_NAMESPACE.put(future.format('nice'), (Math.random()*10+37).toFixed(2))
   const temps: Temperature[] = await Promise.all(keys.keys.map(async k => ({time: k.name, temp: await KV_NAMESPACE.get(k.name)|| ''})))
 
   url.pathname = match.groups.action;
