@@ -4,7 +4,7 @@ compatibility_date = "2022-05-28"
 compatibility_flags = []
 
 kv_namespaces = [
-  { binding = "KV_NAMESPACE", id = "e29b263ab50e42ce9b637fa8370175e8" }
+  { binding = "KV_NAMESPACE", id = "e759e181747c45fc9aa1acf12afdb7b4" }
 ]
 
 [build]
