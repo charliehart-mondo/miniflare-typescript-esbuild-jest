@@ -11,19 +11,7 @@ export async function handleRequest(request: Request, env: Bindings): Promise<Re
     return Response.redirect(`${url.origin}/test/increment`, 302);
   }
 
-  // Forward the request to the named Durable Object...
-  // const { COUNTER } = env;
-  // const id = COUNTER.idFromName(match.groups.name);
-  // const stub = COUNTER.get(id);
-  // ...removing the name prefix from URL
-
   const { KV_NAMESPACE } = env;
-  const st = spacetime()
-  const future = st.add(5, 'minutes')
-  const time = new Date()
-  const plusFive = time.getTime()
-  .toLocaleString()
-  await KV_NAMESPACE.put(future.format('nice'), (Math.random()*10+37).toFixed(2))
   const keys = await KV_NAMESPACE.list()
   const temps: Temperature[] = await Promise.all(keys.keys.map(async k => ({time: k.name, temp: await KV_NAMESPACE.get(k.name)|| ''})))
 

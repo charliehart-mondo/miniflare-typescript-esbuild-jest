@@ -5,7 +5,9 @@ compatibility_flags = []
 
 kv_namespaces = [
   { binding = "KV_NAMESPACE", id = "KV_ID" }
-]
+
+[triggers]
+crons = ["*/1 * * * *"]
 
 [build]
 command = "node build_sched.js"
