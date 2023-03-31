@@ -11,5 +11,5 @@ kv_namespaces = [
 crons = ["*/1 * * * *"]
 
 [build]
-command = "node build_sched.js"
+command = "node build.js"
 
